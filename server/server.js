@@ -1,6 +1,7 @@
-require('dotenv').config()
+require("dotenv").config();
 const express = require("express");
-// const morgan = require("morgan");
+const db = require("./db/index");
+// import morgan from "morgan";
 const app = express();
 
 // MIDDLEWEAR - HAS TO BE TOLD TO PASS ON REQUEST TO 'NEXT' PIECE OF MIDDLEWEAR/or ROUTE HANDLER LIKE BELOW
@@ -19,8 +20,11 @@ app.use(express.json());
 
 
 // ROUTE HANDLERS
+
 // Get all Restaurants
-app.get("/api/v1/restaurants", (req, res) => {
+app.get("/api/v1/restaurants", async (req, res) => {
+
+    const results = await db.query("SELECT * FROM restaurants");
     console.log("Route Handler is Running")
     res.status(200).json({
         status: "Success",
@@ -70,7 +74,7 @@ app.put("/api/v1/restaurants/:id", (req, res) => {
 })
 
 // Delete Restaurant
-app.delete("/api/v1/restaurants/:id", (req, res) => {
+app.delete("/api/v1/restaurants/:id", async (req, res) => {
     
     res.status(204).json({
         status: "Success", 
