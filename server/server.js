@@ -84,9 +84,15 @@ app.put("/api/v1/restaurants/:id", async (req, res) => {
 
 // delete restaurant
 app.delete("/api/v1/restaurants/:id", async (req, res) => {
-  res.status(204).json({
-    status: "Success",
-  });
+  try {
+    const results = await db.query("DELETE FROM restaurants WHERE id = $1", [req.params.id]);
+    res.status(204).json({
+      status: "Success",
+    });
+  } catch (err) {
+    console.log(err);
+  }
+  
 });
 
 const port = process.env.PORT || 5001;
