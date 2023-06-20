@@ -8,10 +8,10 @@ const App = () => {
   return <div>
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/restaurants/:id/update" element={<UpdatePage />} />
-        <Route path="/restaurants/:id" element={<RestaurantDetailsPage />} />
-        <Route path="*" element={<h1>Page Not Found</h1>} />
+        <Route exact path="/" element={<Home />} />
+        <Route exact path="/restaurants/:id/update" element={<UpdatePage />} />
+        <Route exact path="/restaurants/:id" element={<RestaurantDetailsPage />} />
+        <Route exact path="*" element={<h1>Page Not Found</h1>} />
       </Routes>
     </Router>
   </div>;
