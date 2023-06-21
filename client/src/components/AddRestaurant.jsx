@@ -2,8 +2,8 @@ import React from "react";
 
 const AddRestaurant = () => {
   return (
-   <form>
-    <div className="row px-5">
+   <form action="">
+    <div className="row gx-4  mb-5">
       <div className="col">
         <input type="text" className="form-control p-2" placeholder="Name" />
       </div>

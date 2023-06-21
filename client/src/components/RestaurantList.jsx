@@ -3,20 +3,20 @@ import React from 'react'
 const RestaurantList = () => {
   return (
     <div className="list-group">
-        <table className="table table-hover table-dark">
+        <table className="table table-hover table-dark align-middle justify-content-center">
             <thead>
-                <tr className="bg-primary text-white">
-                    <th scope="col">Restaurant</th>
-                    <th scope="col">Location</th>
-                    <th scope="col">Price Range</th>
-                    <th scope="col">Ratings</th>
-                    <th scope="col">Edit</th>
-                    <th scope="col">Delete</th>
+                <tr>
+                    <th className="bg-primary" scope="col">Restaurant</th>
+                    <th className="bg-primary" scope="col">Location</th>
+                    <th className="bg-primary" scope="col">Price Range</th>
+                    <th className="bg-primary" scope="col">Ratings</th>
+                    <th className="bg-primary" scope="col">Edit</th>
+                    <th className="bg-primary" scope="col">Delete</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>McDonalds</td>
+                    <td className="mr-4">McDonalds</td>
                     <td>New York</td>
                     <td>$$</td>
                     <td>Rating</td>

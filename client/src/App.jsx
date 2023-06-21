@@ -5,7 +5,8 @@ import UpdatePage from "./routes/UpdatePage";
 import RestaurantDetailsPage from "./routes/RestaurantDetailsPage";
 
 const App = () => {
-  return <div>
+  return (
+  <div className="container">
     <Router>
       <Routes>
         <Route exact path="/" element={<Home />} />
@@ -14,7 +15,8 @@ const App = () => {
         <Route exact path="*" element={<h1>Page Not Found</h1>} />
       </Routes>
     </Router>
-  </div>;
+  </div>
+  )
 };
 
 export default App;
