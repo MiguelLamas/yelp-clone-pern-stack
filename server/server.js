@@ -1,10 +1,12 @@
 require("dotenv").config();
 const express = require("express");
+const cors = require("cors");
 const db = require("./db/index");
 // import morgan from "morgan";
 const app = express();
 
 // middlewear
+app.use(cors());
 app.use(express.json());
 
 // route handlers
@@ -24,7 +26,7 @@ app.get("/api/v1/restaurants", async (req, res) => {
   } catch (err) {
     console.log(err);
   }
-});
+}); 
 
 // get a specific restaurant
 app.get("/api/v1/restaurants/:id", async (req, res) => {
