@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const RestaurantList = (props) => {
   const { restaurants, setRestaurants } = useContext(RestaurantsContext);
-  let navigate = useNavigate() // history object represents history of our browser
+  let navigate = useNavigate(); // useNavigate function to navigate to specific url as stated in handle functions below.
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -19,7 +19,10 @@ const RestaurantList = (props) => {
     fetchData();
   }, []);
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (e, id) => {
+    // e.stopPropagation means when we click Update button we are not going to send that Event up to the Table row.
+    // it doesnt hit the useNavigate function.
+      e.stopPropagation();
     try {
       const response = await RestaurantFinder.delete(`/${id}`);
       setRestaurants(
@@ -30,11 +33,18 @@ const RestaurantList = (props) => {
     } catch (err) {}
   };
 
-  const handleUpdate = (id) => {
-  // tell react router to navigate to url "localhost:3000/restaurants/id/update" Adding url into History Stack with history.push()
-      navigate(`/restaurants/${id}/update`);
+  const handleUpdate = (e, id) => {
+    // e.stopPropagation means when we click Update button we are not going to send that Event up to the Table row.
+    // it doesnt hit the useNavigate function.
+    e.stopPropagation();
+    
+    // tell react router to navigate to url "localhost:3000/restaurants/id/update"
+    navigate(`/restaurants/${id}/update`);
   };
 
+  const handleRestaurantSelect = (id) => {
+    navigate(`/restaurants/${id}`);
+  };
 
   return (
     <div className="list-group">
@@ -65,18 +75,25 @@ const RestaurantList = (props) => {
           {restaurants &&
             restaurants.map((restaurant) => {
               return (
-                <tr key={restaurant.id}>
+                <tr
+                  onClick={() => handleRestaurantSelect(restaurant.id)}
+                  key={restaurant.id}
+                >
                   <td>{restaurant.name}</td>
                   <td>{restaurant.location}</td>
                   <td>{"$".repeat(restaurant.price_range)}</td>
                   <td>Reviews</td>
                   <td>
-                    <button onClick={() => handleUpdate(restaurant.id)}
-                    className="btn btn-warning">Update</button>
+                    <button
+                      onClick={(e) => handleUpdate(e, restaurant.id)}
+                      className="btn btn-warning"
+                    >
+                      Update
+                    </button>
                   </td>
                   <td>
                     <button
-                      onClick={() => handleDelete(restaurant.id)}
+                      onClick={(e) => handleDelete(e, restaurant.id)}
                       className="btn btn-danger"
                     >
                       Delete
@@ -85,31 +102,6 @@ const RestaurantList = (props) => {
                 </tr>
               );
             })}
-
-          {/* <tr>
-            <td className="mr-4">McDonalds</td>
-            <td>New York</td>
-            <td>$$</td>
-            <td>Rating</td>
-            <td>
-              <button className="btn btn-warning">Update</button>
-            </td>
-            <td>
-              <button className="btn btn-danger">Delete</button>
-            </td>
-          </tr>
-          <tr>
-            <td>McDonalds</td>
-            <td>New York</td>
-            <td>$$</td>
-            <td>Rating</td>
-            <td>
-              <button className="btn btn-warning">Update</button>
-            </td>
-            <td>
-              <button className="btn btn-danger">Delete</button>
-            </td>
-          </tr> */}
         </tbody>
       </table>
     </div>
