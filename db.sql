@@ -38,3 +38,13 @@ CREATE TABLE restaurants (
 -- INSERT INTO TABLE
 INSERT INTO restaurants (id, name, location, price_range) values (123, 'McDonalds', 'New York', 3);
 
+-- CREATE TABLE REVIEWS
+CREATE TABLE reviews (
+    id BIGSERIAL NOT NULL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    review TEXT NOT NULL,
+    rating INT NOT NULL check(rating >=1 and rating <=5)
+);
+
+-- INSERT INTO REVIEWS
+INSERT INTO reviews (name, review, rating) values ('Carl', 'Restaurant was awesome', 5);
