@@ -24,7 +24,7 @@ const AddRestaurant = () => {
 
   return (
     <form action="">
-      <div className="row gx-4  mb-5">
+      <div className="row gx-4 mb-5">
         <div className="col">
           <input
             value={name}

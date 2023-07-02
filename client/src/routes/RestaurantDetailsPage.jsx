@@ -15,7 +15,9 @@ const RestaurantDetailsPage = () => {
     const fetchData = async () => {
       try {
         const response = await RestaurantFinder.get(`/${id}`);
-        setSelectedRestaurant(response.data.data.restaurant);
+        // we want to access both restaurant and reviews from response.data.data,
+        //  rather than just restaurant with response.data.data.restaurant
+        setSelectedRestaurant(response.data.data);
       } catch (err) {
         console.log(err)
       }
@@ -26,8 +28,9 @@ const RestaurantDetailsPage = () => {
 
   return <div>{selectedRestaurant && (
     <>
+    <h1 className="text-center display-1 mt-5">{selectedRestaurant.restaurant.name}</h1>
       <div className="mt-3">
-        <Reviews />
+        <Reviews reviews={selectedRestaurant.reviews} />
       </div>
       <AddReviews />
     </>
