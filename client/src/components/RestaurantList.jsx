@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 import RestaurantFinder from "../apis/RestaurantFinder.js";
 import { RestaurantsContext } from "../context/RestaurantsContext";
 import { useNavigate } from "react-router-dom";
+import StarRating from "../components/StarRating";
 
 const RestaurantList = (props) => {
   const { restaurants, setRestaurants } = useContext(RestaurantsContext);
@@ -22,7 +23,7 @@ const RestaurantList = (props) => {
   const handleDelete = async (e, id) => {
     // e.stopPropagation means when we click Update button we are not going to send that Event up to the Table row.
     // it doesnt hit the useNavigate function.
-      e.stopPropagation();
+    e.stopPropagation();
     try {
       const response = await RestaurantFinder.delete(`/${id}`);
       setRestaurants(
@@ -37,13 +38,25 @@ const RestaurantList = (props) => {
     // e.stopPropagation means when we click Update button we are not going to send that Event up to the Table row.
     // it doesnt hit the useNavigate function.
     e.stopPropagation();
-    
+
     // tell react router to navigate to url "localhost:3000/restaurants/id/update"
     navigate(`/restaurants/${id}/update`);
   };
 
   const handleRestaurantSelect = (id) => {
     navigate(`/restaurants/${id}`);
+  };
+
+  const renderRating = (restaurant) => {
+    if (!restaurant.count) {
+      return <span className="text-warning ml-1">0 reviews</span>
+    }
+    return (
+      <>
+        <StarRating rating={restaurant.id} />
+        <span className="text-warning ml-1">({restaurant.count})</span>
+      </>
+    );
   };
 
   return (
@@ -82,7 +95,7 @@ const RestaurantList = (props) => {
                   <td>{restaurant.name}</td>
                   <td>{restaurant.location}</td>
                   <td>{"$".repeat(restaurant.price_range)}</td>
-                  <td>Reviews</td>
+                  <td>{renderRating(restaurant)}</td>
                   <td>
                     <button
                       onClick={(e) => handleUpdate(e, restaurant.id)}
