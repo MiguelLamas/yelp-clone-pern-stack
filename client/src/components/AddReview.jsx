@@ -19,7 +19,8 @@ const AddReviews = () => {
         review: reviewText,
         rating: rating,
       });
-      window.location.reload() ;
+      window.location.reload(false) ;
+      
     } catch (err) {}
   };
 
