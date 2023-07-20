@@ -31,7 +31,7 @@ The backend is deployed on ElephantSQL however if you would like to run locally 
 1. Git clone the backend repository by pasting the following into your terminal:
 
 ```bash
-  git clone https://github.com/MiguelLamas/yelp-clone-pern-stack-api
+  git clone https://github.com/MiguelLamas/yelp-clone-pern-stack
 ```
 
 2. Install all required dependencies by running:
@@ -74,7 +74,7 @@ To run the front-end locally follow the steps below:
 1. Git clone the front-end repository by pasting the following into your terminal:
 
 ```bash
-  git clone https://github.com/MiguelLamas/yelp-clone-pern-stack-frontend
+  git clone https://github.com/MiguelLamas/yelp-clone-pern-stack
 ```
 
 2. Install all necessary dependencies by running the following command in the terminal:
